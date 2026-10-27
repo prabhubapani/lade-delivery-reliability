@@ -10,7 +10,7 @@ How do observed package acceptance-to-task-completion intervals vary across the 
 
 - Data: five official city delivery shards, 4,514,661 package/order rows from five Chinese cities.
 - The dataset is historical. The source describes an overall period of May–October 2022, while this audit found timestamps outside that window. Timestamp strings omit year and timezone; 2022 is attached provisionally for exploration.
-- The dataset card carries Apache-2.0 metadata and also points readers to research-use terms. The project README describes research use. Review those terms again before public release; raw shards remain local and ignored by Git.
+- The LaDe-D Hugging Face card labels the data Apache-2.0, while the original paper's datasheet describes CC BY-NC 4.0 and the project README says the data can be used for research. This repository does not redistribute raw shards. See [DATA-AND-CODE-NOTICE.md](DATA-AND-CODE-NOTICE.md) for attribution and the unresolved terms discrepancy.
 - No customer reviews, promised delivery deadline, or SLA field is present in the inspected schema. This project does not measure satisfaction or on-time compliance.
 - `ds` is documented as a delivery date, but observed values match acceptance dates more often. It remains an unresolved source field and is not treated as verified delivery date.
 
@@ -22,6 +22,8 @@ How do observed package acceptance-to-task-completion intervals vary across the 
 - Three Chongqing records produce negative intervals under the provisional same-year parse, and timestamps extend beyond the documented period. These anomalies remain visible for source clarification.
 
 Read the full [five-city audit](outputs/LaDe-multicity-audit.md), [Power BI dashboard guide](outputs/PowerBI-dashboard-guide.md), and [interview walkthrough](outputs/Interview-walkthrough.md). The earlier [project brief](outputs/marketplace-delivery-project-brief.md) records the original scope and workflow, and the [Jilin dictionary](outputs/LaDe-Jilin-data-dictionary.md) documents the first-city schema inspection.
+
+This is a free educational portfolio project. Its historical Chinese delivery data is not a proxy for Indian operations. Review the source terms before adapting the analysis for commercial use.
 
 ## Rebuild locally
 

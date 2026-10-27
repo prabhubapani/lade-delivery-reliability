@@ -1,0 +1,16 @@
+# Keep licensed source data and local tooling out of GitHub.
+work/data/raw/
+work/data/staged/
+work/data/aggregates/
+work/python-packages/
+work/tmp/
+work/**/*.duckdb
+work/**/*.duckdb.wal
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+work/
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
