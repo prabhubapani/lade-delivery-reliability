@@ -22,3 +22,4 @@ GitHub's “Keep my email addresses private” setting is enabled. New GitHub we
 ## Remaining portfolio step
 
 The repository is published, but a native Power BI `.pbix` was not created in this session. Use [PowerBI-dashboard-guide.md](PowerBI-dashboard-guide.md) with the aggregate workbook to build and visually review the two report pages in Power BI Desktop. Do not publish report screenshots or a `.pbix` until source-term and attribution review is complete.
+
