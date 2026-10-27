@@ -1,0 +1,41 @@
+# Last-Mile Delivery Reliability: LaDe-D Operational Audit
+
+A portfolio project for entry-level Data Analyst / BI roles. It uses Cainiao-AI's LaDe-D delivery event data to demonstrate data profiling, SQL modeling, operational analysis, and Power BI reporting.
+
+## Project question
+
+How do observed package acceptance-to-task-completion intervals vary across the five city subsets and by source acceptance month/hour, and which data-quality issues must be resolved before using them as operational KPIs?
+
+## Scope and responsible use
+
+- Data: five official city delivery shards, 4,514,661 package/order rows from five Chinese cities.
+- The dataset is historical. The source describes an overall period of May–October 2022, while this audit found timestamps outside that window. Timestamp strings omit year and timezone; 2022 is attached provisionally for exploration.
+- The dataset card carries Apache-2.0 metadata and also points readers to research-use terms. The project README describes research use. Review those terms again before public release; raw shards remain local and ignored by Git.
+- No customer reviews, promised delivery deadline, or SLA field is present in the inspected schema. This project does not measure satisfaction or on-time compliance.
+- `ds` is documented as a delivery date, but observed values match acceptance dates more often. It remains an unresolved source field and is not treated as verified delivery date.
+
+## Findings
+
+- All five shards share the same 17-column schema; each city's `order_id` is unique within that city.
+- The local model has 4,514,661 package rows and 9,029,322 event rows (acceptance and task completion per package).
+- The provisional city median intervals range from 72 to 208 minutes; P90 ranges from 211 to 496 minutes. These are descriptive interval summaries, not city performance ratings.
+- Three Chongqing records produce negative intervals under the provisional same-year parse, and timestamps extend beyond the documented period. These anomalies remain visible for source clarification.
+
+Read the full [five-city audit](outputs/LaDe-multicity-audit.md), [Power BI dashboard guide](outputs/PowerBI-dashboard-guide.md), and [interview walkthrough](outputs/Interview-walkthrough.md). The earlier [project brief](outputs/marketplace-delivery-project-brief.md) records the original scope and workflow, and the [Jilin dictionary](outputs/LaDe-Jilin-data-dictionary.md) documents the first-city schema inspection.
+
+## Rebuild locally
+
+1. Review the [LaDe-D dataset card](https://huggingface.co/datasets/Cainiao-AI/LaDe-D), [data files](https://huggingface.co/datasets/Cainiao-AI/LaDe-D/tree/main/data), and [LaDe project README](https://github.com/wenhaomin/LaDe). Follow the source terms and keep raw data out of Git.
+2. Put the five delivery parquet shards under `work/data/raw/delivery/`.
+3. Install dependencies with `python -m pip install -r requirements.txt`.
+4. Build local package/event models: `python scripts/build_multicity_models.py`.
+5. Build aggregate-only Power BI CSV inputs: `python scripts/build_multicity_aggregates.py`.
+6. Export the easy-import workbook: `python scripts/export_multicity_excel.py`.
+7. Follow [the Power BI guide](outputs/PowerBI-dashboard-guide.md).
+
+The SQL is in `sql/04_multicity_model.sql`. Local source, staged, and aggregate data are excluded from Git. The scripts set DuckDB to a 1 GB memory limit and two threads. The Power BI input workbook contains aggregate tables only.
+
+## Technology
+
+Python, DuckDB, SQL, Power BI Desktop, Git/GitHub. Raw and model data stay local; a public repository should contain scripts, documentation, and reviewed aggregate outputs only.
+
