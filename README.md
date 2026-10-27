@@ -21,7 +21,7 @@ How do observed package acceptance-to-task-completion intervals vary across the 
 - The provisional city median intervals range from 72 to 208 minutes; P90 ranges from 211 to 496 minutes. These are descriptive interval summaries, not city performance ratings.
 - Three Chongqing records produce negative intervals under the provisional same-year parse, and timestamps extend beyond the documented period. These anomalies remain visible for source clarification.
 
-Open the [interactive aggregate-only dashboard preview](outputs/LaDe-interactive-dashboard.html) in a browser. Read the [five-city audit](outputs/LaDe-multicity-audit.md), [Power BI dashboard guide](outputs/PowerBI-dashboard-guide.md), and [interview walkthrough](outputs/Interview-walkthrough.md) for methods and interpretation limits. The earlier [project brief](outputs/marketplace-delivery-project-brief.md) records the original scope and workflow, and the [Jilin dictionary](outputs/LaDe-Jilin-data-dictionary.md) documents the first-city schema inspection.
+Download the [interactive aggregate-only dashboard preview](outputs/LaDe-interactive-dashboard.html) and open it locally in a browser. Read the [five-city audit](outputs/LaDe-multicity-audit.md), [Power BI dashboard guide](outputs/PowerBI-dashboard-guide.md), and [interview walkthrough](outputs/Interview-walkthrough.md) for methods and interpretation limits. The earlier [project brief](outputs/marketplace-delivery-project-brief.md) records the original scope and workflow, and the [Jilin dictionary](outputs/LaDe-Jilin-data-dictionary.md) documents the first-city schema inspection.
 
 This is a free educational portfolio project. Its historical Chinese delivery data is not a proxy for Indian operations. Review the source terms before adapting the analysis for commercial use.
 
@@ -41,4 +41,5 @@ The SQL is in `sql/04_multicity_model.sql`. Local source, staged, and aggregate 
 ## Technology
 
 Python, DuckDB, SQL, Power BI Desktop, Git/GitHub, and a self-contained HTML preview built from aggregate tables. Raw and model data stay local; the public repository contains scripts, documentation, and reviewed aggregate outputs only.
+
 
