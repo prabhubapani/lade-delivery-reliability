@@ -1,25 +1,27 @@
 # GitHub publishing checklist
 
-## Repository summary
+## Repository
 
 **Repository:** [prabhubapani/lade-delivery-reliability](https://github.com/prabhubapani/lade-delivery-reliability)  
 **Visibility:** Public  
 **Description:** `A Python, DuckDB, SQL, and Power BI portfolio project auditing historical LaDe-D last-mile delivery data from five Chinese cities.`
 
-## Published content and data boundary
+## Published project materials
 
-- The repository contains project code, SQL, documentation, an aggregate-only workbook, and reviewed aggregate outputs.
-- It does not contain raw parquet shards, package-level/event-level records, or local DuckDB databases. Keep them in ignored `work/` storage.
-- Review the [LaDe-D dataset card](https://huggingface.co/datasets/Cainiao-AI/LaDe-D), its linked research-use terms, the [LaDe project README](https://github.com/wenhaomin/LaDe), and [DATA-AND-CODE-NOTICE.md](../DATA-AND-CODE-NOTICE.md) before reuse. The dataset card and original paper describe different terms; this project conservatively limits use to a free educational portfolio and does not redistribute source data.
-- Keep the China and 2022 caveats prominent. The data is historical and does not represent Indian delivery operations.
-- The inspected schema contains no customer reviews, promised delivery deadline, or SLA field. Do not claim measured satisfaction or on-time/SLA compliance.
-- Do not add an open-source license until the project's code-license choice is deliberate. Dataset license metadata does not automatically license this project's code or source data.
+- Python profiling, modeling, aggregate-export, and interactive preview scripts.
+- SQL models and project documentation, including the multi-city audit, field dictionary, and interview walkthrough.
+- Reviewed aggregate-only CSV/workbook outputs, HTML preview, and the native Power BI `.pbix` report.
+- No raw parquet shards, package/event-level records, or local DuckDB database files. Keep those in ignored `work/` storage.
+
+## Data use and interpretation
+
+- Review the [LaDe-D dataset card](https://huggingface.co/datasets/Cainiao-AI/LaDe-D), linked terms, [LaDe project README](https://github.com/wenhaomin/LaDe), and [data/code notice](../DATA-AND-CODE-NOTICE.md) before reuse. Source statements conflict; this is a free educational portfolio and raw data is not redistributed.
+- The data is historical and from China (2022). It is not a proxy for Indian operations.
+- The inspected schema has no customer reviews, promise deadline, or SLA field. Do not claim measured customer satisfaction or on-time/SLA compliance.
+- The source states May–October 2022, while some timestamps fall outside that interval. Year 2022 is assigned provisionally and timezone is undocumented.
+- Do not add an open-source license until the project's code-license choice is deliberate. Dataset metadata does not automatically license project code or source data.
 
 ## Account email privacy
 
-GitHub's “Keep my email addresses private” setting is enabled. New GitHub web/API commits use the account's `users.noreply.github.com` address. The very first public commit predates that setting and retains the primary email in its historical author metadata. The setting does not rewrite old commits. If that email was sensitive, GitHub commit history can be rewritten, but it may affect clones and links to old commits.
-
-## Remaining portfolio step
-
-The repository is published, but a native Power BI `.pbix` was not created in this session. Use [PowerBI-dashboard-guide.md](PowerBI-dashboard-guide.md) with the aggregate workbook to build and visually review the two report pages in Power BI Desktop. Do not publish report screenshots or a `.pbix` until source-term and attribution review is complete.
+GitHub's “Keep my email addresses private” setting is enabled. New GitHub web/API commits use the account's `users.noreply.github.com` address. The first public commit predates that setting and retains the primary email in historical author metadata. The setting does not rewrite old commits. Rewriting history may affect existing clones and links.
 
