@@ -1,3 +1,7 @@
+## Offline interactive preview
+
+Run `python scripts/build_dashboard_preview.py` after generating the aggregate CSV inputs. This creates `outputs/LaDe-interactive-dashboard.html`; open it locally in a browser. It embeds city-month, city-hour, and region-month aggregates only and includes filters, package-weighted interval-rate cards, and group-level percentile visuals. It is a portfolio preview, not a native Power BI `.pbix`, and it should not be described as one.
+
 # Power BI dashboard build guide
 
 ## Import the prepared aggregate workbook
