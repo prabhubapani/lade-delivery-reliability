@@ -21,7 +21,7 @@ How do observed package acceptance-to-task-completion intervals vary across the 
 - The provisional city median intervals range from 72 to 208 minutes; P90 ranges from 211 to 496 minutes. These are descriptive interval summaries, not city performance ratings.
 - Three Chongqing records produce negative intervals under the provisional same-year parse, and timestamps extend beyond the documented period. These anomalies remain visible for source clarification.
 
-Read the full [five-city audit](outputs/LaDe-multicity-audit.md), [Power BI dashboard guide](outputs/PowerBI-dashboard-guide.md), and [interview walkthrough](outputs/Interview-walkthrough.md). The earlier [project brief](outputs/marketplace-delivery-project-brief.md) records the original scope and workflow, and the [Jilin dictionary](outputs/LaDe-Jilin-data-dictionary.md) documents the first-city schema inspection.
+Open the [interactive aggregate-only dashboard preview](outputs/LaDe-interactive-dashboard.html) in a browser. Read the [five-city audit](outputs/LaDe-multicity-audit.md), [Power BI dashboard guide](outputs/PowerBI-dashboard-guide.md), and [interview walkthrough](outputs/Interview-walkthrough.md) for methods and interpretation limits. The earlier [project brief](outputs/marketplace-delivery-project-brief.md) records the original scope and workflow, and the [Jilin dictionary](outputs/LaDe-Jilin-data-dictionary.md) documents the first-city schema inspection.
 
 This is a free educational portfolio project. Its historical Chinese delivery data is not a proxy for Indian operations. Review the source terms before adapting the analysis for commercial use.
 
@@ -33,11 +33,12 @@ This is a free educational portfolio project. Its historical Chinese delivery da
 4. Build local package/event models: `python scripts/build_multicity_models.py`.
 5. Build aggregate-only Power BI CSV inputs: `python scripts/build_multicity_aggregates.py`.
 6. Export the easy-import workbook: `python scripts/export_multicity_excel.py`.
-7. Follow [the Power BI guide](outputs/PowerBI-dashboard-guide.md).
+7. Generate the offline dashboard preview: `python scripts/build_dashboard_preview.py`.
+8. Follow [the Power BI guide](outputs/PowerBI-dashboard-guide.md) to recreate and visually review the report in Power BI Desktop. The HTML preview is not a native `.pbix`.
 
 The SQL is in `sql/04_multicity_model.sql`. Local source, staged, and aggregate data are excluded from Git. The scripts set DuckDB to a 1 GB memory limit and two threads. The Power BI input workbook contains aggregate tables only.
 
 ## Technology
 
-Python, DuckDB, SQL, Power BI Desktop, Git/GitHub. Raw and model data stay local; a public repository should contain scripts, documentation, and reviewed aggregate outputs only.
+Python, DuckDB, SQL, Power BI Desktop, Git/GitHub, and a self-contained HTML preview built from aggregate tables. Raw and model data stay local; the public repository contains scripts, documentation, and reviewed aggregate outputs only.
 
