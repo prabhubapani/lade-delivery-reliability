@@ -1,45 +1,28 @@
-## Offline interactive preview
+# Power BI report guide
 
-Run `python scripts/build_dashboard_preview.py` after generating the aggregate CSV inputs. This creates `outputs/LaDe-interactive-dashboard.html`; open it locally in a browser. It embeds city-month, city-hour, and region-month aggregates only and includes filters, package-weighted interval-rate cards, and group-level percentile visuals. It is a portfolio preview, not a native Power BI `.pbix`, and it should not be described as one.
+Open `LaDe-Delivery-Reliability.pbix` in Power BI Desktop. The report uses three prepared aggregate tables from `LaDe-PowerBI-aggregates.xlsx`; it does not contain raw package or courier event rows.
 
-# Power BI dashboard build guide
+## Pages
 
-## Import the prepared aggregate workbook
+### Page 1: Monthly delivery interval
 
-In Power BI Desktop, cancel the open Text/CSV dialog, then choose **Home → Excel workbook** and open `outputs/LaDe-PowerBI-aggregates.xlsx`. In Navigator, select the three aggregate sheets: `CityMonth`, `AcceptanceHour`, and `RegionMonth`.
+The line chart shows the monthly median acceptance-to-task-completion interval by city. It uses the maximum aggregation of the precomputed median because each city has one row per month. The chart is filtered to source acceptance months 5–10 (May–October). A footer explains that the source contains some dates outside that range and that no SLA or customer satisfaction is measured.
 
-These sheets contain aggregate-only metrics. Do not load raw package or courier rows into a public report. Keep the model local until terms and attribution have been rechecked.
+### Page 2: Region-month detail
 
-## Page 1: Delivery interval overview
+The table lists `city`, `region_id`, source `accept_month`, `median_elapsed_min`, and summed `package_count`. Region codes remain identifiers because the source does not supply verified neighborhood names here. The table retains available source months outside May–October, so interpret it alongside the documented date anomalies. Segment aggregates are volume screened: groups below 200 packages are omitted from the prepared segment files.
 
-- KPI cards: package count and over-24-hour interval rate. Show median and P90 on the grouped chart, not as all-period KPI cards.
-- Line chart from `CityMonth`: `accept_month` on X; median and P90 elapsed minutes as values; `city` as legend. Put package count in the tooltip.
-- Avoid an all-period city ranking from the precomputed percentiles; those aggregates cannot be combined into an exact full-period P90.
-- Add a visible note: “Historical LaDe-D data from China (2022); acceptance-to-task-completion interval; timestamp year provisionally set to 2022; not SLA/on-time or customer satisfaction.”
+## Interpretation and limits
 
-## Page 2: Operating pattern exploration
+- LaDe-D is historical data from China in 2022, not a current Indian operations benchmark.
+- The interval is acceptance-to-task-completion based on the inspected event schema. It is not delivery promise compliance or an SLA measure.
+- There are no customer reviews; do not claim measured customer satisfaction.
+- Timestamp year is assigned provisionally as 2022; timezone is undocumented. Source hour should not be described as local time.
+- Some records fall outside the source's stated May–October window, and three elapsed intervals are negative under the provisional parse.
+- Precomputed medians and P90s are valid for their displayed group only. Do not average group percentiles to claim an exact overall percentile.
+- Package counts may be summed across distinct groups. For one row per city-month or city-region-month, use a non-summing aggregation for median/P90 fields.
 
-- Matrix or line chart from `AcceptanceHour`: source acceptance hour by city, with median/P90 and package count. Use city and month slicers.
-- Use `RegionMonth` for a region-code matrix by month. Label region as **region_id**, not a neighborhood name.
-- Groups below 200 have already been omitted from these segment files. Display a note that this is a volume screen, not a statistical guarantee.
+## Source and data handling
 
-## Suggested measures
-
-For the city/month table, a package-weighted rate is valid across the selected rows:
-
-```DAX
-Packages = SUM(CityMonth[package_count])
-Over 24h rate = DIVIDE(SUM(CityMonth[over_24h_count]), [Packages])
-```
-
-Use the precomputed median and P90 columns within the city/month, city/hour, or city/region/month group shown on the visual. Do not average monthly medians or group P90 values to claim an exact all-period percentile. If you need an overall percentile, calculate it from the local package fact in DuckDB and expose only the aggregate result.
-## Visual and interpretation checks
-
-- Avoid red/green “late/on-time” labels; no deadline is in the data.
-- Show the package count next to every percentile so small groups are visible.
-- Filter out incomplete or anomalous dates only with a written rule. Keep negative elapsed count visible as a data-quality indicator.
-- Do not interpret source clock hours as local time until timezone is documented.
-- Do not present the city ranking as causal or as a current India benchmark.
-- Save a `.pbix` only after visual review. Publish screenshots/PDF and aggregate CSVs only after terms/attribution review; never include raw shards.
-
+Review the LaDe-D dataset card, original project README, and [`DATA-AND-CODE-NOTICE.md`](../DATA-AND-CODE-NOTICE.md) before reuse. Their licensing/use statements are inconsistent; the project is limited to a free educational portfolio and does not redistribute raw shards. The PBIX includes prepared aggregate tables only.
 
